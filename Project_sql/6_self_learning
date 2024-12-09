@@ -1,0 +1,15 @@
+SELECT 
+    job_postings_fact.company_id,
+    job_postings_fact.job_title_short,
+    job_postings_fact.job_country,
+    job_location,
+    job_postings_fact.salary_year_avg,
+    company_dim.name AS company_name
+FROM 
+    job_postings_fact
+    INNER JOIN company_dim ON job_postings_fact.company_id = company_dim.company_id
+
+WHERE 
+    job_country = 'India' AND salary_year_avg IS NOT NULL
+ORDER BY
+   job_postings_fact.salary_year_avg DESC 
